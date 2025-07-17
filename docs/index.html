@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiation Go SDK - Interactive Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #00ADD8 0%, #007D9C 100%);
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 100px 0;
+            background: linear-gradient(135deg, #00ADD8 0%, #007D9C 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '🐹';
+            position: absolute;
+            font-size: 12rem;
+            opacity: 0.15;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: bounce 3s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .badges {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .badge {
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .demo-section {
+            padding: 80px 0;
+            background: #1a1a1a;
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .demo-card {
+            background: rgba(255,255,255,0.05);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .demo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .demo-card h3 {
+            color: #00ADD8;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow-x: auto;
+            border-left: 4px solid #00ADD8;
+        }
+
+        .code-block code {
+            color: #ffffff;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .interactive-demo {
+            background: rgba(255,255,255,0.05);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 40px 0;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .demo-input {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+
+        .demo-input::placeholder {
+            color: rgba(255,255,255,0.6);
+        }
+
+        .demo-button {
+            background: linear-gradient(45deg, #00ADD8, #007D9C);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        .demo-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,173,216,0.3);
+        }
+
+        .demo-output {
+            background: #2d2d2d;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            min-height: 100px;
+            border: 1px solid rgba(0,173,216,0.3);
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .features {
+            padding: 80px 0;
+            background: #333333;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background: rgba(255,255,255,0.05);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #00ADD8 0%, #007D9C 100%);
+            text-align: center;
+        }
+
+        .cta-button {
+            background: #ffffff;
+            color: #00ADD8;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: #00ADD8;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .go-keyword {
+            color: #00ADD8;
+            font-weight: bold;
+        }
+
+        .go-type {
+            color: #a6e22e;
+        }
+
+        .go-function {
+            color: #f92672;
+        }
+
+        .go-string {
+            color: #e6db74;
+        }
+
+        @media (max-width: 768px) {
+            .demo-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .badges {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="container">
+            <h1>🐹 Tiation Go SDK</h1>
+            <p>High-performance Go SDK with concurrency and type safety</p>
+            
+            <div class="badges">
+                <span class="badge">Go 1.19+</span>
+                <span class="badge">Goroutines</span>
+                <span class="badge">Type Safe</span>
+                <span class="badge">Enterprise Ready</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="demo-section">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 20px; color: #00ADD8;">Interactive Go Demo</h2>
+            <p style="text-align: center; margin-bottom: 40px; opacity: 0.8;">Experience the power of Tiation Go SDK with concurrent operations</p>
+
+            <div class="interactive-demo">
+                <h3>🚀 Go SDK Simulator</h3>
+                <p>Test Go SDK functionality with goroutines and channels:</p>
+                
+                <input type="text" class="demo-input" id="apiKey" placeholder="Enter your API key (or use demo mode)">
+                <button class="demo-button" onclick="testSequential()">Sequential Calls</button>
+                <button class="demo-button" onclick="testConcurrent()">Concurrent Calls</button>
+                <button class="demo-button" onclick="testChannels()">Channel Operations</button>
+                <button class="demo-button" onclick="runGoDemo()">Full Demo</button>
+                
+                <div class="demo-output" id="output">
+                    <p style="color: #00ADD8;">Go SDK Demo Ready...</p>
+                </div>
+            </div>
+
+            <div class="demo-grid">
+                <div class="demo-card">
+                    <h3>⚡ Concurrent Operations</h3>
+                    <p>Built-in support for goroutines and channels</p>
+                    <div class="code-block">
+                        <code>
+<span class="go-keyword">func</span> <span class="go-function">processConcurrently</span>(client *tiation.Client, ctx context.Context) {
+    <span class="go-keyword">var</span> wg sync.WaitGroup
+    
+    <span class="go-keyword">go</span> <span class="go-keyword">func</span>() {
+        <span class="go-keyword">defer</span> wg.Done()
+        metrics, _ := client.Analytics.GetMetrics(ctx)
+        <span class="go-keyword">// Process metrics</span>
+    }()
+    
+    <span class="go-keyword">go</span> <span class="go-keyword">func</span>() {
+        <span class="go-keyword">defer</span> wg.Done()
+        workflows, _ := client.Automation.ListWorkflows(ctx)
+        <span class="go-keyword">// Process workflows</span>
+    }()
+    
+    wg.Wait()
+}
+                        </code>
+                    </div>
+                </div>
+
+                <div class="demo-card">
+                    <h3>🛡️ Type Safety</h3>
+                    <p>Strongly typed interfaces with comprehensive error handling</p>
+                    <div class="code-block">
+                        <code>
+<span class="go-keyword">type</span> <span class="go-type">Analytics</span> <span class="go-keyword">struct</span> {
+    Revenue    <span class="go-type">float64</span> <span class="go-string">`json:"revenue"`</span>
+    Users      <span class="go-type">int</span>     <span class="go-string">`json:"users"`</span>
+    Growth     <span class="go-type">float64</span> <span class="go-string">`json:"growth"`</span>
+}
+
+<span class="go-keyword">func</span> <span class="go-function">main</span>() {
+    client := tiation.NewClient(<span class="go-string">"your_api_key"</span>)
+    ctx := context.Background()
+    
+    analytics, err := client.Analytics.GetMetrics(ctx)
+    <span class="go-keyword">if</span> err != <span class="go-keyword">nil</span> {
+        log.Fatal(err)
+    }
+    
+    fmt.Printf(<span class="go-string">"Revenue: $%.2f\n"</span>, analytics.Revenue)
+}
+                        </code>
+                    </div>
+                </div>
+
+                <div class="demo-card">
+                    <h3>📡 Channel Operations</h3>
+                    <p>Efficient channel-based communication for data processing</p>
+                    <div class="code-block">
+                        <code>
+<span class="go-keyword">func</span> <span class="go-function">processWithChannels</span>(client *tiation.Client) {
+    results := <span class="go-keyword">make</span>(<span class="go-keyword">chan</span> *tiation.Analytics, <span class="go-type">10</span>)
+    
+    <span class="go-keyword">go</span> <span class="go-keyword">func</span>() {
+        <span class="go-keyword">defer</span> <span class="go-keyword">close</span>(results)
+        
+        analytics, err := client.Analytics.GetMetrics(ctx)
+        <span class="go-keyword">if</span> err == <span class="go-keyword">nil</span> {
+            results <- analytics
+        }
+    }()
+    
+    <span class="go-keyword">for</span> result := <span class="go-keyword">range</span> results {
+        fmt.Printf(<span class="go-string">"Processed: $%.2f\n"</span>, result.Revenue)
+    }
+}
+                        </code>
+                    </div>
+                </div>
+
+                <div class="demo-card">
+                    <h3>🔧 Error Handling</h3>
+                    <p>Comprehensive error handling with custom error types</p>
+                    <div class="code-block">
+                        <code>
+<span class="go-keyword">func</span> <span class="go-function">handleErrors</span>(client *tiation.Client) {
+    metrics, err := client.Analytics.GetMetrics(ctx)
+    <span class="go-keyword">if</span> err != <span class="go-keyword">nil</span> {
+        <span class="go-keyword">switch</span> e := err.(<span class="go-keyword">type</span>) {
+        <span class="go-keyword">case</span> *tiation.RateLimitError:
+            fmt.Printf(<span class="go-string">"Rate limit: %v\n"</span>, e.RetryAfter)
+        <span class="go-keyword">case</span> *tiation.APIError:
+            fmt.Printf(<span class="go-string">"API error: %s\n"</span>, e.Message)
+        <span class="go-keyword">default</span>:
+            fmt.Printf(<span class="go-string">"Unexpected error: %v\n"</span>, err)
+        }
+    }
+}
+                        </code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="features">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 40px;">Why Choose Tiation Go SDK?</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3>High Performance</h3>
+                    <p>Optimized for speed with Go's efficient runtime and garbage collector</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Concurrency First</h3>
+                    <p>Built-in goroutine support for concurrent API operations</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Type Safety</h3>
+                    <p>Strongly typed interfaces with compile-time error checking</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📡</div>
+                    <h3>Channel Communication</h3>
+                    <p>Efficient data flow with Go's channel-based communication</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔧</div>
+                    <h3>Simple Integration</h3>
+                    <p>Easy to integrate with existing Go applications and frameworks</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🏢</div>
+                    <h3>Enterprise Ready</h3>
+                    <p>Built for scale with connection pooling and circuit breakers</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cta-section">
+        <div class="container">
+            <h2 style="margin-bottom: 30px;">Ready to Build with Go?</h2>
+            <p style="margin-bottom: 40px; font-size: 1.2rem;">Join the Go developer community using Tiation SDK</p>
+            
+            <a href="https://github.com/tiation/tiation-go-sdk" class="cta-button">📚 Documentation</a>
+            <a href="https://pkg.go.dev/github.com/tiation/tiation-go-sdk" class="cta-button">📦 Go Package</a>
+            <a href="mailto:tiatheone@protonmail.com" class="cta-button">💬 Get Support</a>
+        </div>
+    </div>
+
+    <script>
+        function updateOutput(content, isError = false) {
+            const output = document.getElementById('output');
+            const color = isError ? '#ff6b6b' : '#00ADD8';
+            output.innerHTML = `<p style="color: ${color};">${content}</p>`;
+        }
+
+        function showLoading() {
+            updateOutput('<span class="loading"></span> Processing Go code...');
+        }
+
+        function testSequential() {
+            showLoading();
+            
+            setTimeout(() => {
+                updateOutput(`<span style="color: #00ADD8;">package</span> main<br><br>
+                    <span style="color: #00ADD8;">func</span> <span style="color: #f92672;">main</span>() {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;client := tiation.NewClient(<span style="color: #e6db74;">"demo_key"</span>)<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;ctx := context.Background()<br><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;analytics, _ := client.Analytics.GetMetrics(ctx)<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;workflows, _ := client.Automation.ListWorkflows(ctx)<br>
+                    }<br><br>
+                    <span style="color: #2ecc71;">✅ Sequential calls completed!</span><br>
+                    Total time: 2.1s<br>
+                    Analytics: Revenue $125,430 | Users 1,247`);
+            }, 1500);
+        }
+
+        function testConcurrent() {
+            showLoading();
+            
+            setTimeout(() => {
+                updateOutput(`<span style="color: #00ADD8;">var</span> wg sync.WaitGroup<br><br>
+                    <span style="color: #00ADD8;">go</span> <span style="color: #00ADD8;">func</span>() {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #00ADD8;">defer</span> wg.Done()<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;analytics, _ := client.Analytics.GetMetrics(ctx)<br>
+                    }()<br><br>
+                    <span style="color: #00ADD8;">go</span> <span style="color: #00ADD8;">func</span>() {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #00ADD8;">defer</span> wg.Done()<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;workflows, _ := client.Automation.ListWorkflows(ctx)<br>
+                    }()<br><br>
+                    wg.Wait()<br><br>
+                    <span style="color: #2ecc71;">✅ Concurrent operations completed!</span><br>
+                    Goroutines: 2<br>
+                    Total time: 1.1s (2x faster!)`);
+            }, 2000);
+        }
+
+        function testChannels() {
+            showLoading();
+            
+            setTimeout(() => {
+                updateOutput(`results := <span style="color: #00ADD8;">make</span>(<span style="color: #00ADD8;">chan</span> *tiation.Analytics, 10)<br><br>
+                    <span style="color: #00ADD8;">go</span> <span style="color: #00ADD8;">func</span>() {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #00ADD8;">defer</span> <span style="color: #00ADD8;">close</span>(results)<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;analytics, _ := client.Analytics.GetMetrics(ctx)<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;results <- analytics<br>
+                    }()<br><br>
+                    <span style="color: #00ADD8;">for</span> result := <span style="color: #00ADD8;">range</span> results {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;fmt.Printf(<span style="color: #e6db74;">"Processed: $%.2f\\n"</span>, result.Revenue)<br>
+                    }<br><br>
+                    <span style="color: #2ecc71;">✅ Channel operations completed!</span><br>
+                    Channel buffer: 10<br>
+                    Processed: $125,430.50`);
+            }, 1800);
+        }
+
+        function runGoDemo() {
+            showLoading();
+            
+            setTimeout(() => {
+                updateOutput(`<span style="color: #2ecc71;">🐹 Go SDK Full Demo</span><br><br>
+                    <span style="color: #00ADD8;">package</span> main<br><br>
+                    <span style="color: #00ADD8;">import</span> (<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #e6db74;">"context"</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #e6db74;">"fmt"</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #e6db74;">"sync"</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #e6db74;">"github.com/tiation/tiation-go-sdk/tiation"</span><br>
+                    )<br><br>
+                    <span style="color: #00ADD8;">func</span> <span style="color: #f92672;">main</span>() {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;client := tiation.NewClient(<span style="color: #e6db74;">"demo_key"</span>)<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;ctx := context.Background()<br><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #00ADD8;">var</span> wg sync.WaitGroup<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;wg.Add(3)<br><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #2ecc71;">// Concurrent API calls</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #00ADD8;">go</span> fetchAnalytics(client, ctx, &wg)<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #00ADD8;">go</span> createWorkflow(client, ctx, &wg)<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #00ADD8;">go</span> processContent(client, ctx, &wg)<br><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;wg.Wait()<br>
+                    }<br><br>
+                    <span style="color: #2ecc71;">✅ Full demo completed!</span><br>
+                    📊 Analytics: Revenue $125,430 | Users 1,247<br>
+                    🔄 Workflow: "Go Demo" (ID: go_wf_123)<br>
+                    📝 Content: "Go SDK Launch" published<br>
+                    ⚡ Total time: 0.9s with 3 goroutines`);
+            }, 2500);
+        }
+
+        // Auto-run demo on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                updateOutput('🐹 Go SDK interactive demo loaded! Try the buttons above to test concurrent operations.');
+            }, 500);
+        });
+    </script>
+</body>
+</html>
