@@ -1,291 +1,293 @@
-# Tiation Go SDK
+# Project Name
 
+<!-- Hero Image with Dark Neon Theme -->
 <div align="center">
-  <img src="https://via.placeholder.com/800x200/1a1a2e/16213e?text=Tiation+Go+SDK" alt="Tiation Go SDK Banner" />
-  
-  <h3>Official Go SDK for Tiation APIs</h3>
-  
-  [![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/tiation/tiation-go-sdk)
-  [![Go](https://img.shields.io/badge/go-1.19+-brightgreen.svg)](https://golang.org)
-  [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-  [![Enterprise](https://img.shields.io/badge/enterprise-ready-purple.svg)](https://github.com/tiation)
+  <img src=".screenshots/hero-banner.png" alt="Project Hero Banner" width="100%">
 </div>
 
-## 🌟 Overview
+<div align="center">
+  
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-00D9FF?style=for-the-badge&logo=github&logoColor=white)](https://tiaastor.github.io/tiation-go-sdk)
+[![Documentation](https://img.shields.io/badge/Documentation-Complete-00FF88?style=for-the-badge&logo=gitbook&logoColor=white)](https://github.com/TiaAstor/tiation-go-sdk/wiki)
+[![License](https://img.shields.io/badge/License-MIT-FF0080?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](LICENSE)
 
-The Tiation Go SDK provides a high-performance, enterprise-grade interface for interacting with all Tiation services. Built with Go's concurrency model and designed for scalability, it offers seamless integration with your Go applications.
+</div>
+
+## 🚀 About
+
+**Brief, compelling description of what this project does and why it matters.**
+
+<div align="center">
+  <img src=".screenshots/demo-overview.png" alt="Project Overview" width="80%">
+</div>
+
+---
 
 ## ✨ Features
 
-- **🚀 High Performance**: Optimized for speed with Go's concurrency
-- **🔒 Enterprise Security**: Built-in authentication and rate limiting
-- **📊 Real-time Analytics**: Live metrics and business intelligence
-- **🔄 Concurrent Operations**: Full support for goroutines and channels
-- **🛡️ Type Safety**: Strongly typed interfaces and error handling
-- **📚 Rich Documentation**: Comprehensive docs with examples
-- **⚡ Low Latency**: Optimized for high-throughput applications
+<!-- Feature showcase with screenshots -->
+<table>
+  <tr>
+    <td width="50%">
+      <h3>🎯 Key Feature 1</h3>
+      <img src=".screenshots/feature-1.png" alt="Feature 1 Screenshot" width="100%">
+      <p>Description of feature 1 with benefits</p>
+    </td>
+    <td width="50%">
+      <h3>⚡ Key Feature 2</h3>
+      <img src=".screenshots/feature-2.png" alt="Feature 2 Screenshot" width="100%">
+      <p>Description of feature 2 with benefits</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <h3>🔥 Key Feature 3</h3>
+      <img src=".screenshots/feature-3.png" alt="Feature 3 Screenshot" width="100%">
+      <p>Description of feature 3 with benefits</p>
+    </td>
+    <td width="50%">
+      <h3>🌟 Key Feature 4</h3>
+      <img src=".screenshots/feature-4.png" alt="Feature 4 Screenshot" width="100%">
+      <p>Description of feature 4 with benefits</p>
+    </td>
+  </tr>
+</table>
 
-## 📦 Installation
+---
 
-```bash
-go get github.com/tiation/tiation-go-sdk
-```
+## 🎨 Live Demo
+
+<div align="center">
+  <a href="https://tiaastor.github.io/tiation-go-sdk" target="_blank">
+    <img src=".screenshots/demo-preview.png" alt="Live Demo Preview" width="80%">
+  </a>
+  <br>
+  <a href="https://tiaastor.github.io/tiation-go-sdk" target="_blank">
+    <img src="https://img.shields.io/badge/🔗%20View%20Live%20Demo-00D9FF?style=for-the-badge&logo=github&logoColor=white" alt="View Live Demo">
+  </a>
+</div>
+
+---
+
+## 🏗️ Architecture
+
+<div align="center">
+  <img src=".screenshots/architecture-diagram.png" alt="Architecture Diagram" width="90%">
+</div>
+
+### System Components
+
+- **Component 1**: Description and purpose
+- **Component 2**: Description and purpose
+- **Component 3**: Description and purpose
+
+---
 
 ## 🚀 Quick Start
 
-```go
-package main
+### Prerequisites
 
-import (
-    "context"
-    "fmt"
-    "log"
-    
-    "github.com/tiation/tiation-go-sdk/tiation"
-)
-
-func main() {
-    // Initialize client
-    client := tiation.NewClient("your_api_key")
-    
-    // Get business analytics
-    ctx := context.Background()
-    analytics, err := client.Analytics.GetMetrics(ctx)
-    if err != nil {
-        log.Fatal(err)
-    }
-    
-    fmt.Printf("Total revenue: $%.2f\n", analytics.Revenue)
-    
-    // Create automation workflow
-    workflow := &tiation.Workflow{
-        Name:    "Customer Onboarding",
-        Trigger: "user_signup",
-        Actions: []string{"send_welcome_email", "create_profile"},
-    }
-    
-    result, err := client.Automation.CreateWorkflow(ctx, workflow)
-    if err != nil {
-        log.Fatal(err)
-    }
-    
-    fmt.Printf("Workflow created: %s\n", result.ID)
-}
+```bash
+# List prerequisites here
+node --version  # >= 18.0.0
+npm --version   # >= 8.0.0
 ```
 
-## 📚 Documentation
+### Installation
 
-### Authentication
+```bash
+# Clone the repository
+git clone https://github.com/TiaAstor/tiation-go-sdk.git
+cd tiation-go-sdk
 
-```go
-import "github.com/tiation/tiation-go-sdk/tiation"
+# Install dependencies
+npm install
 
-// API Key authentication
-client := tiation.NewClient("your_api_key")
-
-// OAuth2 authentication
-config := &tiation.Config{
-    ClientID:     "your_client_id",
-    ClientSecret: "your_client_secret",
-    OAuthToken:   "your_oauth_token",
-}
-client := tiation.NewClientWithConfig(config)
+# Start development server
+npm run dev
 ```
 
-### Core Services
+### Development Workflow
 
-#### Analytics & Metrics
-```go
-// Get business metrics
-metrics, err := client.Analytics.GetMetrics(ctx, &tiation.MetricsRequest{
-    StartDate: "2024-01-01",
-    EndDate:   "2024-12-31",
-})
+<div align="center">
+  <img src=".screenshots/development-workflow.png" alt="Development Workflow" width="70%">
+</div>
 
-// Real-time dashboard data
-dashboard, err := client.Analytics.GetDashboard(ctx)
-```
+---
 
-#### Automation Workflows
-```go
-// List workflows
-workflows, err := client.Automation.ListWorkflows(ctx)
+## 📱 Screenshots
 
-// Execute workflow
-result, err := client.Automation.ExecuteWorkflow(ctx, &tiation.ExecuteRequest{
-    WorkflowID: "workflow_123",
-    Parameters: map[string]interface{}{
-        "user_id": "user_456",
-    },
-})
-```
+### Desktop Interface
 
-#### Content Management
-```go
-// Create content
-content := &tiation.Content{
-    Title:    "New Product Launch",
-    Body:     "Exciting new features available now!",
-    Category: "announcements",
-}
-result, err := client.CMS.CreateContent(ctx, content)
+<div align="center">
+  <img src=".screenshots/desktop-interface.png" alt="Desktop Interface" width="100%">
+</div>
 
-// Update content
-err = client.CMS.UpdateContent(ctx, result.ID, &tiation.ContentUpdate{
-    Status: "published",
-})
-```
+### Mobile Interface
 
-### Advanced Features
+<div align="center">
+  <img src=".screenshots/mobile-interface.png" alt="Mobile Interface" width="60%">
+</div>
 
-#### Concurrent Operations
-```go
-import "sync"
+### Dark Theme
 
-func processConcurrently(client *tiation.Client, ctx context.Context) {
-    var wg sync.WaitGroup
-    
-    // Concurrent API calls
-    wg.Add(3)
-    
-    go func() {
-        defer wg.Done()
-        metrics, _ := client.Analytics.GetMetrics(ctx)
-        // Process metrics
-    }()
-    
-    go func() {
-        defer wg.Done()
-        workflows, _ := client.Automation.ListWorkflows(ctx)
-        // Process workflows
-    }()
-    
-    go func() {
-        defer wg.Done()
-        content, _ := client.CMS.ListContent(ctx)
-        // Process content
-    }()
-    
-    wg.Wait()
-}
-```
+<div align="center">
+  <img src=".screenshots/dark-theme.png" alt="Dark Theme Interface" width="100%">
+</div>
 
-#### Error Handling
-```go
-import "github.com/tiation/tiation-go-sdk/tiation"
+---
 
-metrics, err := client.Analytics.GetMetrics(ctx)
-if err != nil {
-    switch e := err.(type) {
-    case *tiation.RateLimitError:
-        fmt.Printf("Rate limit exceeded, retry after: %v\n", e.RetryAfter)
-    case *tiation.APIError:
-        fmt.Printf("API error: %s (code: %d)\n", e.Message, e.Code)
-    default:
-        fmt.Printf("Unexpected error: %v\n", err)
-    }
-}
-```
+## 🛠️ Technology Stack
+
+<div align="center">
+  <img src=".screenshots/tech-stack.png" alt="Technology Stack" width="80%">
+</div>
+
+- **Frontend**: React, TypeScript, Tailwind CSS
+- **Backend**: Node.js, Express
+- **Database**: PostgreSQL
+- **Deployment**: Docker, GitHub Actions
+
+---
+
+## 📊 Performance Metrics
+
+<div align="center">
+  <img src=".screenshots/performance-metrics.png" alt="Performance Metrics" width="90%">
+</div>
+
+---
 
 ## 🔧 Configuration
 
 ### Environment Variables
-```bash
-export TIATION_API_KEY="your_api_key"
-export TIATION_BASE_URL="https://api.tiation.com"
-export TIATION_TIMEOUT=30
+
+```env
+# Copy to .env.local
+NODE_ENV=development
+DATABASE_URL=postgresql://username:password@localhost:5432/database
+API_KEY=your-api-key-here
 ```
 
-### Configuration Struct
-```go
-config := &tiation.Config{
-    APIKey:     "your_api_key",
-    BaseURL:    "https://api.tiation.com",
-    Timeout:    30 * time.Second,
-    MaxRetries: 3,
-    RetryDelay: 1 * time.Second,
-}
+### Configuration Screenshots
 
-client := tiation.NewClientWithConfig(config)
-```
+<div align="center">
+  <img src=".screenshots/configuration-setup.png" alt="Configuration Setup" width="70%">
+</div>
 
-## 🏢 Enterprise Features
+---
 
-### Batch Operations
-```go
-// Batch create content
-contents := []*tiation.Content{
-    {Title: "Article 1", Body: "Content 1"},
-    {Title: "Article 2", Body: "Content 2"},
-}
-results, err := client.CMS.BatchCreate(ctx, contents)
+## 📚 Documentation
 
-// Batch analytics
-requests := []*tiation.MetricsRequest{
-    {Metric: "revenue", Period: "monthly"},
-    {Metric: "users", Period: "daily"},
-}
-metrics, err := client.Analytics.BatchMetrics(ctx, requests)
-```
+<div align="center">
+  <a href="https://github.com/TiaAstor/tiation-go-sdk/wiki" target="_blank">
+    <img src=".screenshots/documentation-preview.png" alt="Documentation Preview" width="80%">
+  </a>
+  <br>
+  <a href="https://github.com/TiaAstor/tiation-go-sdk/wiki" target="_blank">
+    <img src="https://img.shields.io/badge/📖%20Full%20Documentation-00FF88?style=for-the-badge&logo=gitbook&logoColor=white" alt="Full Documentation">
+  </a>
+</div>
 
-### Webhook Integration
-```go
-import "github.com/tiation/tiation-go-sdk/webhooks"
+### Quick Links
 
-processor := webhooks.NewProcessor("your_webhook_secret")
+- [📘 User Guide](docs/user-guide.md)
+- [🔧 API Reference](docs/api-reference.md)
+- [🏗️ Architecture Guide](docs/architecture.md)
+- [🚀 Deployment Guide](docs/deployment.md)
 
-processor.HandleEvent("user.created", func(event *webhooks.Event) error {
-    fmt.Printf("New user: %s\n", event.Data["email"])
-    
-    // Trigger welcome workflow
-    _, err := client.Automation.ExecuteWorkflow(ctx, &tiation.ExecuteRequest{
-        WorkflowID: "welcome_workflow",
-        Parameters: map[string]interface{}{
-            "user_id": event.Data["id"],
-        },
-    })
-    
-    return err
-})
-```
-
-## 🧪 Testing
-
-```bash
-# Run tests
-go test ./...
-
-# Run with coverage
-go test -cover ./...
-
-# Run specific test
-go test -run TestAnalyticsGetMetrics ./analytics
-```
+---
 
 ## 🤝 Contributing
 
 We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
 
+<div align="center">
+  <img src=".screenshots/contribution-workflow.png" alt="Contribution Workflow" width="70%">
+</div>
+
 ### Development Setup
 
 ```bash
-# Clone repository
-git clone https://github.com/tiation/tiation-go-sdk.git
+# Fork the repository
+git clone https://github.com/your-username/tiation-go-sdk.git
 cd tiation-go-sdk
 
-# Install dependencies
-go mod tidy
+# Create feature branch
+git checkout -b feature/amazing-feature
 
-# Run tests
-go test ./...
+# Make changes and commit
+git commit -m "Add amazing feature"
+
+# Push to branch
+git push origin feature/amazing-feature
 ```
+
+---
+
+## 🧪 Testing
+
+<div align="center">
+  <img src=".screenshots/testing-dashboard.png" alt="Testing Dashboard" width="80%">
+</div>
+
+```bash
+# Run all tests
+npm test
+
+# Run tests with coverage
+npm run test:coverage
+
+# Run end-to-end tests
+npm run test:e2e
+```
+
+---
+
+## 🚀 Deployment
+
+<div align="center">
+  <img src=".screenshots/deployment-pipeline.png" alt="Deployment Pipeline" width="90%">
+</div>
+
+### Production Deployment
+
+```bash
+# Build for production
+npm run build
+
+# Deploy to GitHub Pages
+npm run deploy
+```
+
+---
+
+## 📈 Roadmap
+
+<div align="center">
+  <img src=".screenshots/roadmap.png" alt="Project Roadmap" width="90%">
+</div>
+
+- [x] Core functionality
+- [x] Dark theme implementation
+- [ ] Mobile app version
+- [ ] Advanced analytics
+- [ ] Third-party integrations
+
+---
 
 ## 📞 Support
 
-- **Documentation**: [Go SDK Docs](https://docs.tiation.com/go-sdk)
-- **API Reference**: [API Documentation](https://api.tiation.com/docs)
-- **Issues**: [GitHub Issues](https://github.com/tiation/tiation-go-sdk/issues)
-- **Enterprise Support**: [tiatheone@protonmail.com](mailto:tiatheone@protonmail.com)
+<div align="center">
+  <img src=".screenshots/support-channels.png" alt="Support Channels" width="70%">
+</div>
+
+- 📧 **Email**: [support@example.com](mailto:support@example.com)
+- 💬 **Discord**: [Join our community](https://discord.gg/example)
+- 🐛 **Issues**: [GitHub Issues](https://github.com/TiaAstor/tiation-go-sdk/issues)
+- 📖 **Wiki**: [Documentation](https://github.com/TiaAstor/tiation-go-sdk/wiki)
+
+---
 
 ## 📄 License
 
@@ -293,7 +295,24 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
+## 🌟 Acknowledgments
+
 <div align="center">
-  <p>Built with ❤️ by <a href="https://github.com/tiation">Tiation</a></p>
-  <p>High-performance Go SDK for enterprise applications</p>
+  <img src=".screenshots/acknowledgments.png" alt="Acknowledgments" width="60%">
+</div>
+
+- Thanks to all contributors
+- Special thanks to the open-source community
+- Inspired by modern development practices
+
+---
+
+<div align="center">
+  <img src=".screenshots/footer-banner.png" alt="Footer Banner" width="100%">
+  
+  **⭐ Star this repository if you find it helpful! ⭐**
+  
+  <a href="https://github.com/TiaAstor/tiation-go-sdk">
+    <img src="https://img.shields.io/github/stars/TiaAstor/tiation-go-sdk?style=social&label=Star&maxAge=2592000" alt="GitHub Stars">
+  </a>
 </div>
